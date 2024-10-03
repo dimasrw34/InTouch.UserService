@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "vQwA3z5Ybe61NOCWcTnKR8qKdg/wYdzJN1h0xTFXFOVVHk5XTb376wDM0wQZGz48k5M0r2PxDOtWq0KJNz7osQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\boyar\\RiderProjects\\InTouch.UserService\\InTouch.UserService.Core\\InTouch.UserService.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\boyar\\.nuget\\packages\\mediatr\\12.4.1\\mediatr.12.4.1.nupkg.sha512",
+    "C:\\Users\\boyar\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\boyar\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

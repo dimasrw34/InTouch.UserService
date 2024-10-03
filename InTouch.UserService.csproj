@@ -10,4 +10,37 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Controllers\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="InTouch.UserService.Core\**" />
+      <Compile Remove="InTouch.UserService.Domain\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="InTouch.UserService.Core\**" />
+      <EmbeddedResource Remove="InTouch.UserService.Domain\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="InTouch.UserService.Core\**" />
+      <Content Remove="InTouch.UserService.Domain\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="InTouch.UserService.Core\**" />
+      <None Remove="InTouch.UserService.Domain\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="InTouch.UserService.Core\obj\InTouch.UserService.Core.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="InTouch.UserService.Core\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="InTouch.UserService.Core\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="InTouch.UserService.Domain\obj\InTouch.UserService.Domain.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="InTouch.UserService.Domain\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="InTouch.UserService.Domain\obj\project.packagespec.json" />
+    </ItemGroup>
+
 </Project>
