@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "UYzwCR71Wk3+jgnykQj7BZ7yLKUtGT7+nYbW/abedexD5N++m6NK+dortpwDbWOVJQ72FTf9eLFuYHGvMtpVjQ==",
+  "dgSpecHash": "2VEXl5FYXXtBYCcQyaMwec7XGClQdpZXm+DuDIQBcOMjSxpyKYMXLliu4JGo+1Y6tOr+ot2cJjfMZn+m1JoFsA==",
   "success": true,
   "projectFilePath": "C:\\Users\\boyar\\RiderProjects\\InTouch.UserService\\InTouch.UserService.Domain\\InTouch.UserService.Domain.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\boyar\\.nuget\\packages\\ardalis.result\\10.0.0\\ardalis.result.10.0.0.nupkg.sha512",
     "C:\\Users\\boyar\\.nuget\\packages\\mediatr\\12.4.1\\mediatr.12.4.1.nupkg.sha512",
     "C:\\Users\\boyar\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\boyar\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"

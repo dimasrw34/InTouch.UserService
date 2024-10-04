@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "Ardalis.Result/10.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Ardalis.Result.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/Ardalis.Result.dll": {}
+        }
+      },
       "MediatR/12.4.1": {
         "type": "package",
         "dependencies": {
@@ -64,6 +73,22 @@
     }
   },
   "libraries": {
+    "Ardalis.Result/10.0.0": {
+      "sha512": "JCUSQl+9dbL7kUltUpFmUeBTnC89fEDEtjIhLZTKymeV9DeWjfxdFhN+vmrKARqzOluH/eyxbUoA6mKqctEzFQ==",
+      "type": "package",
+      "path": "ardalis.result/10.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ardalis.result.10.0.0.nupkg.sha512",
+        "ardalis.result.nuspec",
+        "icon.png",
+        "lib/net6.0/Ardalis.Result.dll",
+        "lib/net7.0/Ardalis.Result.dll",
+        "lib/net8.0/Ardalis.Result.dll",
+        "lib/netstandard2.0/Ardalis.Result.dll"
+      ]
+    },
     "MediatR/12.4.1": {
       "sha512": "0tLxCgEC5+r1OCuumR3sWyiVa+BMv3AgiU4+pz8xqTc+2q1WbUEXFOr7Orm96oZ9r9FsldgUtWvB2o7b9jDOaw==",
       "type": "package",
@@ -135,6 +160,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Ardalis.Result >= 10.0.0",
       "InTouch.UserService.Core >= 1.0.0"
     ]
   },
@@ -187,6 +213,12 @@
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
+        "dependencies": {
+          "Ardalis.Result": {
+            "target": "Package",
+            "version": "[10.0.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
