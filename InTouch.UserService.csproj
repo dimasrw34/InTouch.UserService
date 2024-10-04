@@ -17,21 +17,25 @@
     <ItemGroup>
       <Compile Remove="InTouch.UserService.Core\**" />
       <Compile Remove="InTouch.UserService.Domain\**" />
+      <Compile Remove="InTouch.Application\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="InTouch.UserService.Core\**" />
       <EmbeddedResource Remove="InTouch.UserService.Domain\**" />
+      <EmbeddedResource Remove="InTouch.Application\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Remove="InTouch.UserService.Core\**" />
       <Content Remove="InTouch.UserService.Domain\**" />
+      <Content Remove="InTouch.Application\**" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="InTouch.UserService.Core\**" />
       <None Remove="InTouch.UserService.Domain\**" />
+      <None Remove="InTouch.Application\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -41,6 +45,9 @@
       <_ContentIncludedByDefault Remove="InTouch.UserService.Domain\obj\InTouch.UserService.Domain.csproj.nuget.dgspec.json" />
       <_ContentIncludedByDefault Remove="InTouch.UserService.Domain\obj\project.assets.json" />
       <_ContentIncludedByDefault Remove="InTouch.UserService.Domain\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="InTouch.Application\obj\InTouch.Application.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="InTouch.Application\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="InTouch.Application\obj\project.packagespec.json" />
     </ItemGroup>
 
 </Project>
