@@ -5,7 +5,7 @@ namespace InTouch.UserService.Core;
 /// </summary>
 /// <typeparam name="TEntity">Тип: Сущность.</typeparam>
 /// <typeparam name="TKey">Тип: Ключ.</typeparam>
-public interface IWriteOnlyRepository<TEntity, in TKey> : IDisposable
+public interface IWriteOnlycRepository<TEntity, in TKey> : IDisposable
     where TEntity : IEntity<TKey>
     where TKey : IEquatable<TKey>
 {

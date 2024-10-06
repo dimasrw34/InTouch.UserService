@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InTouch.UserService.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eddbe987715a8b232bed09d94a3e75678dd888c6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+294742038718ddfab470f61cd9d471f29eb5dea8")]
 [assembly: System.Reflection.AssemblyProductAttribute("InTouch.UserService.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InTouch.UserService.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

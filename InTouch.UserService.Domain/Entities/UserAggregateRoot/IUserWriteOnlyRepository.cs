@@ -2,7 +2,7 @@ using InTouch.UserService.Core;
 
 namespace InTouch.UserService.Domain;
 
-public interface IUserWriteOnlyRepository : IWriteOnlyRepository<User,Guid>
+public interface IUserWriteOnlyRepository :IWriteOnlycRepository<User,Guid>
 {
     /// <summary>
     /// Проверяет, существует ли пользователь с указанным адресом электронной почты.

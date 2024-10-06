@@ -5,14 +5,18 @@ using MediatR;
 
 using InTouch.UserService.Domain;
 using InTouch.UserService.Core;
+using InTouch.Infrastructure;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using IUnitOfWork = InTouch.Infrastructure.IUnitOfWork;
 
 namespace InTouch.Application;
 
 public class CreateUserCommandHandler(
     IValidator<CreateUserCommand> validator,
     IUserWriteOnlyRepository repository,
-    IUnitOfWork unitOfWork) : IRequestHandler<CreateUserCommand, Result<CreatedUserResponse>>
+    IUnitOfWorkFactory unitOfWorkFactory) : IRequestHandler<CreateUserCommand, Result<CreatedUserResponse>>
 {
+    private readonly IUnitOfWorkFactory _unitOfWorkFactory=unitOfWorkFactory ; 
     public async Task<Result<CreatedUserResponse>> Handle(
         CreateUserCommand request,
         CancellationToken cancellationToken)
@@ -45,7 +49,15 @@ public class CreateUserCommandHandler(
         repository.Add(_user);
         
         // Сохранение изменений в БД и срабатывание событий.
-        await unitOfWork.SaveChanges();
+        //await unitOfWork.SaveChanges();
+        
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        using var uow = _unitOfWorkFactory.CreateUnitOfWork();
+        var insertTask1 = uow.Repository<User>().InsertAsync(_user);
+        uow.Commit();
+        
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
 
         // Возвращаем ИД нового пользователя и сообщение об успехе.
         return Result<CreatedUserResponse>.Success(
