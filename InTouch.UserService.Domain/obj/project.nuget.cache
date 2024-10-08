@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "2VEXl5FYXXtBYCcQyaMwec7XGClQdpZXm+DuDIQBcOMjSxpyKYMXLliu4JGo+1Y6tOr+ot2cJjfMZn+m1JoFsA==",
+  "dgSpecHash": "5taKIEgiM/qnoBjyjLJUC/hvO2WdU9Fxc1aJGHXP/ViSazqcaOZ9mrS+4zHhB4B8sGwdzSEKR9zzM+Y7UU7obQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\boyar\\RiderProjects\\InTouch.UserService\\InTouch.UserService.Domain\\InTouch.UserService.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\boyar\\.nuget\\packages\\ardalis.result\\10.0.0\\ardalis.result.10.0.0.nupkg.sha512",
+    "C:\\Users\\boyar\\.nuget\\packages\\fluentvalidation\\11.10.0\\fluentvalidation.11.10.0.nupkg.sha512",
+    "C:\\Users\\boyar\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.10.0\\fluentvalidation.dependencyinjectionextensions.11.10.0.nupkg.sha512",
     "C:\\Users\\boyar\\.nuget\\packages\\mediatr\\12.4.1\\mediatr.12.4.1.nupkg.sha512",
     "C:\\Users\\boyar\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\boyar\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"

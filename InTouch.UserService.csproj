@@ -3,15 +3,13 @@
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
+        <ImplicitUsings>disable</ImplicitUsings>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="MediatR" Version="12.4.1" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Controllers\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -21,6 +19,7 @@
       <Compile Remove="InTouch.Infrastructure\**" />
       <Compile Remove="InTouch.UserService.Query\**" />
       <Compile Remove="InTouch.UserService.Application\**" />
+      <Compile Remove="InTouch.UserService.Infrastructure\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -30,6 +29,7 @@
       <EmbeddedResource Remove="InTouch.Infrastructure\**" />
       <EmbeddedResource Remove="InTouch.UserService.Query\**" />
       <EmbeddedResource Remove="InTouch.UserService.Application\**" />
+      <EmbeddedResource Remove="InTouch.UserService.Infrastructure\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -39,6 +39,7 @@
       <Content Remove="InTouch.Infrastructure\**" />
       <Content Remove="InTouch.UserService.Query\**" />
       <Content Remove="InTouch.UserService.Application\**" />
+      <Content Remove="InTouch.UserService.Infrastructure\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -48,6 +49,7 @@
       <None Remove="InTouch.Infrastructure\**" />
       <None Remove="InTouch.UserService.Query\**" />
       <None Remove="InTouch.UserService.Application\**" />
+      <None Remove="InTouch.UserService.Infrastructure\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -70,6 +72,18 @@
       <_ContentIncludedByDefault Remove="InTouch.UserService.Application\obj\InTouch.UserService.Application.csproj.nuget.dgspec.json" />
       <_ContentIncludedByDefault Remove="InTouch.UserService.Application\obj\project.assets.json" />
       <_ContentIncludedByDefault Remove="InTouch.UserService.Application\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="InTouch.UserService.Infrastructure\obj\InTouch.Infrastructure.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="InTouch.UserService.Infrastructure\obj\InTouch.UserService.Infrastructure.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="InTouch.UserService.Infrastructure\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="InTouch.UserService.Infrastructure\obj\project.packagespec.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Controllers\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="InTouch.UserService.Application\InTouch.UserService.Application.csproj" />
     </ItemGroup>
 
 </Project>
