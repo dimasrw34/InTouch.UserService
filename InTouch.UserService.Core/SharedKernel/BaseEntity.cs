@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace InTouch.UserService.Core;
 
 /// <summary>
@@ -24,20 +27,24 @@ public abstract class BaseEntity : IEntity<Guid>
     /// Получает уникальный идентификатор этой сущности.
     /// </summary>   
     public Guid Id { get; private init; }
-
+    
     /// <summary>
     /// Получает события домена, связанные с этой сущностью.
     /// </summary>
-    private IEnumerable<BaseEvent> DomainEvents => _domainEvents.AsReadOnly();
+    public IEnumerable<BaseEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     /// <summary>
     /// Добавляет событие домена к сущности.
     /// </summary>
     /// <param name="domainEvent"></param>
-    protected void AddDomainEvent(BaseEvent domainEvent) => _domainEvents.Add(domainEvent);
+    protected void AddDomainEvent(BaseEvent domainEvent)
+    {
+        _domainEvents.Add(domainEvent);
+    }
 
     /// <summary>
     /// Очищает все события домена, связанные с этой сущностью.
     /// </summary>
     public void ClearDomainEvents() => _domainEvents.Clear();
+
 }

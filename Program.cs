@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using InTouch.Application;
+using InTouch.Infrastructure;
 using InTouch.UserService.Core;
+using InTouch.UserService.Extensions;
+using InTouch.UserService.Query;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +17,13 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddControllers();
 
+
+builder.Services.AddInfrastructure();
 builder.Services.AddCommandHandlers();
+builder.Services.AddQueryHandlers();
+builder.Services.AddWriteOnlyRepositories();
 builder.Services.AddResponseMediatr();
+
 
 builder.Services.AddSwaggerGen();
 
@@ -34,7 +42,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseErrorHandling();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

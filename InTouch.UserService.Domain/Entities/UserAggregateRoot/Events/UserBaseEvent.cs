@@ -14,6 +14,7 @@ public abstract class UserBaseEvent : BaseEvent
     )
     {
         Id = id;
+        AggregateID = id;
         Email = email;
         Password = password;
         Name = name;

@@ -32,6 +32,7 @@ public class User : BaseEntity, IAggregateRoot
             Phone = phone;
             //Добавляем событие в брокер событий
             AddDomainEvent(new UserCreatedEvent(Id, email.Address, password,name,surname, phone));
+            
         }
     /// <summary>
     /// Меняет почтовый адрес пользователя
@@ -45,8 +46,10 @@ public class User : BaseEntity, IAggregateRoot
         AddDomainEvent(new UserUpdatedEvent(Id, newEmail.Address, Password, Name, Surname, Phone));
     }
     
+    
+    
     /// <summary>
-    /// Удалет юзера
+    /// Удаляет юзера
     /// </summary>
     public void Delete()
     {
@@ -58,6 +61,7 @@ public class User : BaseEntity, IAggregateRoot
     #endregion Конструктор и методы с событиями
   
     #region Свойства
+    
     
     /// <summary>
     /// Получаем почту пользователя

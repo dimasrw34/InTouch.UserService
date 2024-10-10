@@ -16,7 +16,7 @@ public class CreateUserCommandValidator: AbstractValidator<CreateUserCommand>
 
         RuleFor(command => command.Email)
             .NotEmpty()
-            .MaximumLength(254);
-        //.EmailAddress();
+            .MaximumLength(254)
+            .EmailAddress();
     }
 }

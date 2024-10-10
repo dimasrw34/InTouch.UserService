@@ -1,3 +1,5 @@
+using System;
+
 namespace InTouch.UserService.Core;
 
 public class EventStore : BaseEvent
@@ -13,7 +15,8 @@ public class EventStore : BaseEvent
         MessageType = messageType; 
         Data = data;
     }
-    
+
+
     /// <summary>
     /// Получает или задает идентификатор.
     /// </summary>

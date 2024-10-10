@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\InTouch.UserService.Core\InTouch.UserService.Core.csproj" />
+      <ProjectReference Include="..\InTouch.UserService.Domain\InTouch.UserService.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>

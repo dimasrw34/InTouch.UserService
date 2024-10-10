@@ -4,6 +4,15 @@ namespace InTouch.UserService.Domain;
 
 public static class UserFactory
 {
+    /// <summary>
+    /// Используется для тестирования
+    /// </summary>
+    /// <param name="email"></param>
+    /// <param name="password"></param>
+    /// <param name="name"></param>
+    /// <param name="surname"></param>
+    /// <param name="phone"></param>
+    /// <returns></returns>
     public static Result<User> Create(
         string email, 
         string password, 

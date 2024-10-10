@@ -1,11 +1,11 @@
-using MediatR;
+using System;
 
 namespace InTouch.UserService.Core;
 
 /// <summary>
 /// Представляет собой базовое событие.
 /// </summary>
-public class BaseEvent : MediatR.INotification
+public abstract class BaseEvent : MediatR.INotification
 {
     /// <summary>
     /// Получает тип сообщения.

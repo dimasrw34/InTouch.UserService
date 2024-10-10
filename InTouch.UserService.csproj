@@ -84,6 +84,7 @@
 
     <ItemGroup>
       <ProjectReference Include="InTouch.UserService.Application\InTouch.UserService.Application.csproj" />
+      <ProjectReference Include="InTouch.UserService.Query\InTouch.UserService.Query.csproj" />
     </ItemGroup>
 
 </Project>

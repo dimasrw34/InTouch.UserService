@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+
 namespace InTouch.UserService.Core;
 
 /// <summary>
@@ -9,5 +12,5 @@ public interface IUnitOfWork : IDisposable
     /// Сохраняет изменения, внесенные в единицу работы, асинхронно.
     /// </summary>
     /// <returns>Задача, представляющая асинхронную операцию.</returns>
-    Task SaveChanges();
+    Task SaveChanges(BaseEntity entity);
 }

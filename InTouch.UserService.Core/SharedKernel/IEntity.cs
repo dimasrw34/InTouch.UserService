@@ -1,3 +1,5 @@
+using System;
+
 namespace InTouch.UserService.Core;
 
 /// <summary>

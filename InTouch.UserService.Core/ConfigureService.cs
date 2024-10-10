@@ -1,8 +1,6 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+
 namespace InTouch.UserService.Core;
 
 public static class ConfigureService
