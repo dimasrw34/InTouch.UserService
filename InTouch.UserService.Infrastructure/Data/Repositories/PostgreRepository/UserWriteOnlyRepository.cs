@@ -8,23 +8,23 @@ public class UserWriteOnlyRepository : BasePostgreRepository, IUserWriteOnlyRepo
 {
     public async Task<Guid> AddAsync(BaseEntity baseEntity)
     {
+        Console.WriteLine("Сохраняем сущность в PostreSQL");
         var user =  baseEntity as User;
         
         //После сохранения, нужно сделать EventStore
         var eventRepository = new EventRepository();
         
-        var bb = new EventStore(
+        var eventStore = new EventStore(
             user.Id,
             "Create entity",
             user.ToJson());
+
+
         
-        
-        
-        eventRepository.StoreAsync(bb);
+        eventRepository.StoreAsync(eventStore);
         
 
-        return Guid.NewGuid();
-
+        return user.Id;
     }
 
     public async Task ChangePasswordAsync(BaseEntity entity)

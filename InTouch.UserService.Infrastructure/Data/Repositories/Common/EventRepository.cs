@@ -6,7 +6,7 @@ public class EventRepository : BasePostgreRepository, IEventStoreRepository
 {
   public async Task StoreAsync(EventStore? eventStore)
     {
-        Console.WriteLine("Save EventStore to Repo with    " + "\n"
+        Console.WriteLine("Сохраняем  EventStore (события) to PostreSQL with    " + "\n"
                                                              + "  AggregateID: " + eventStore.AggregateID.ToString()+ "\n"
                                                              + "  MessageType " + eventStore.MessageType.ToString()+ "\n"
                                                              + "  Data JSON:  " + eventStore.Data+ "\n"

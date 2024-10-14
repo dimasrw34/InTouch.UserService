@@ -27,9 +27,6 @@ public class CreateUserCommandHandler(
         CreateUserCommand request,
         CancellationToken cancellationToken)
     {
-
-        
-        
         //Валидация request.
        
         var _validationResult = await validator.ValidateAsync(request, cancellationToken);
@@ -58,10 +55,11 @@ public class CreateUserCommandHandler(
             request.Phone);
         
         // Добавляем сущность в репозиторий
-        repository.AddAsync(_user);
+        await repository.AddAsync(_user);
+        
         
         // Сохранение изменений в БД и срабатывание событий.
-        unitOfWork.SaveChanges(_user);
+       await unitOfWork.SaveChanges(_user, cancellationToken);
         
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /*

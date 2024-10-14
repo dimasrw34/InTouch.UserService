@@ -1,4 +1,5 @@
 using System.Reflection;
+using MediatR.NotificationPublishers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace InTouch.UserService.Core;
@@ -9,6 +10,10 @@ public static class ConfigureService
     {
         var assembly = Assembly.GetExecutingAssembly();
         
-        return services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
+        return services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(assembly);
+            cfg.NotificationPublisher = new TaskWhenAllPublisher();
+        });
     }
 }

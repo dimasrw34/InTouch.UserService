@@ -23,6 +23,7 @@ builder.Services.AddCommandHandlers();
 builder.Services.AddQueryHandlers();
 builder.Services.AddWriteOnlyRepositories();
 builder.Services.AddResponseMediatr();
+builder.Services.AddReadDbContext();
 
 
 builder.Services.AddSwaggerGen();

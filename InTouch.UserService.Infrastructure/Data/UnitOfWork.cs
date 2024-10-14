@@ -7,13 +7,15 @@ namespace InTouch.Infrastructure.Data;
 //IEventStoreRepository eventStoreRepository
 public class UnitOfWork (IMediator mediator) : IUnitOfWork
 {
-    public async Task SaveChanges(BaseEntity entity)
+    public async Task SaveChanges(BaseEntity entity, CancellationToken cancellationToken)
     {
-        
-        await mediator.Publish(entity.DomainEvents.FirstOrDefault());
+        foreach (var @event in entity.DomainEvents)
+        {
+            await mediator.Publish(@event, cancellationToken);
+        }
     }
-    
-    
+
+
     #region IDisposable
 
     // To detect redundant calls.
