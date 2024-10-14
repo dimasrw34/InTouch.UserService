@@ -7,7 +7,7 @@ public abstract class BasePostgreRepository
 {
     //protected readonly string _connectionString = configuration.GetConnectionString("PostgreSQL");
     //protected readonly ILogger _logger = logger;
-    protected readonly string _connectionString = "";
+    protected readonly string _connectionString = "Host=192.168.1.116;Database=postgres;Username=root;Password=example;Persist Security Info=True";
         
     public async Task ExecuteAsync(string sql, object param)
     {

@@ -1,8 +1,8 @@
-using InTouch.UserService.Core;
+using InTouch.UserService.Domain;
 
 namespace InTouch.Infrastructure.Data;
 
 public interface IUserWriteOnlyRepository : IWriteOnlyRepository
 {
-    Task ChangePasswordAsync(BaseEntity entity);
+    Task ChangePasswordAsync(User entity);
 }

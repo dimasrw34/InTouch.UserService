@@ -1,8 +1,10 @@
 using System;
 using System.Reflection;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
+using System.Text.Unicode;
 
 
 namespace InTouch.UserService.Core;
@@ -10,7 +12,11 @@ namespace InTouch.UserService.Core;
 public static class JsonExtensions
 {
     private static readonly Lazy<JsonSerializerOptions> LazyOptions =
-        new(() => new JsonSerializerOptions().Configure(), isThreadSafe: true);
+        new(() => new JsonSerializerOptions()
+        {
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin,UnicodeRanges.Cyrillic),
+            WriteIndented = true
+        }.Configure(), isThreadSafe: true);
 
     /// <summary>
     /// Преобразует строку JSON в объект типа T.
