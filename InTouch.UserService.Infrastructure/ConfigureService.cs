@@ -1,5 +1,4 @@
 using InTouch.Infrastructure.Data;
-using InTouch.Infrastructure.Data.Extensions;
 using InTouch.UserService.Core;
 using InTouch.UserService.Domain;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +11,7 @@ public static class ConfigureService
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
       return services
-          .AddScoped<IDbContext,DapperDbContext>()
+          .AddScoped<IDbContext,PostgreDbContext>()
           .AddScoped<UnitOfWork>();
     }
     public static IServiceCollection AddWriteOnlyRepositories(this IServiceCollection services)

@@ -1,6 +1,4 @@
-using System.Data;
 using Dapper;
-using InTouch.Infrastructure.Data.Extensions;
 
 namespace InTouch.Infrastructure.Data;
 

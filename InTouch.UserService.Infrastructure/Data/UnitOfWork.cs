@@ -1,11 +1,8 @@
 using System.Data;
-using InTouch.Infrastructure.Data.Extensions;
 using MediatR;
-using Npgsql;
 
 using InTouch.UserService.Core;
 using InTouch.UserService.Domain;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace InTouch.Infrastructure.Data;
 
@@ -15,8 +12,8 @@ public class UnitOfWork(
     IEventStoreRepository eventStoreRepository,
     IMediator mediator) : IUnitOfWork<User,Guid>
 {
-    private NpgsqlTransactionAsync _transaction;
-    private NpgsqlConnectionAsync _connection;
+    private IDbTransactionAsync _transaction;
+    private IDbConnectionAsync _connection;
     private IUserWriteOnlyRepository<User, Guid> Users => userWriteOnlyRepository;
 
     private IEventStoreRepository Events => eventStoreRepository;

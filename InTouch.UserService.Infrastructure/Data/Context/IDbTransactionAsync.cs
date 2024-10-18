@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace InTouch.Infrastructure.Data.Extensions;
+namespace InTouch.Infrastructure.Data;
 
 public interface IDbTransactionAsync : IDbTransaction
 {

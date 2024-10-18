@@ -1,7 +1,7 @@
 using System.Data;
 using Npgsql;
 
-namespace InTouch.Infrastructure.Data.Extensions;
+namespace InTouch.Infrastructure.Data;
 
 public class NpgsqlTransactionAsync (ValueTask<NpgsqlTransaction> transaction): IDbTransactionAsync 
 {

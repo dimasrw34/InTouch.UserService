@@ -1,7 +1,7 @@
 using System.Data;
-using System.Data.Common;using Npgsql;
+using Npgsql;
 
-namespace InTouch.Infrastructure.Data.Extensions;
+namespace InTouch.Infrastructure.Data;
 
 public class NpgsqlConnectionAsync(NpgsqlConnection connection) : IDbConnectionAsync
 {
@@ -42,13 +42,11 @@ public class NpgsqlConnectionAsync(NpgsqlConnection connection) : IDbConnectionA
     public string Database
     {
         get => _connection.Database; 
-        
     }
 
     public ConnectionState State
     {
         get => _connection.State; 
-        
     }
 
     #endregion

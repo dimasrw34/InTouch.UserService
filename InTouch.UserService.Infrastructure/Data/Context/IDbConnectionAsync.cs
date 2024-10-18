@@ -1,7 +1,6 @@
 using System.Data;
-using Npgsql;
 
-namespace InTouch.Infrastructure.Data.Extensions;
+namespace InTouch.Infrastructure.Data;
 
 public interface IDbConnectionAsync : IDbConnection
 {
