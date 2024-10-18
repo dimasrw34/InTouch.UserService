@@ -11,24 +11,18 @@ using InTouch.UserService.Domain;
 
 namespace InTouch.Application;
 
-/*
- IUserWriteOnlyRepository repository,
-    IUnitOfWorkFactory unitOfWorkFactory
- */
-
 public class CreateUserCommandHandler(
     IValidator<CreateUserCommand> validator,
-    IUserWriteOnlyRepository repository,
-    IUnitOfWork unitOfWork
+    UnitOfWork unitOfWork,
+    IDbContext dbContext
     ) : IRequestHandler<CreateUserCommand, Result<CreatedUserResponse>>
 {
-     
+    
     public async Task<Result<CreatedUserResponse>> Handle(
         CreateUserCommand request,
         CancellationToken cancellationToken)
     {
         //Валидация request.
-       
         var _validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!_validationResult.IsValid)
         {
@@ -54,21 +48,14 @@ public class CreateUserCommandHandler(
             request.Surname,
             request.Phone);
         
-        // Добавляем сущность в репозиторий
-        await repository.AddAsync(_user);
-        
-        
+       var eventStore = new EventStore(
+           _user.Id,
+           "CreateUserEntity",
+           _user.ToJson());
+
         // Сохранение изменений в БД и срабатывание событий.
-       await unitOfWork.SaveChanges(_user, cancellationToken);
-        
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /*
-        using var uow = _unitOfWorkFactory.CreateUnitOfWork();
-        var insertTask1 = uow.Repository<User>().InsertAsync(_user);
-        uow.Commit();
-        */
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
+              await unitOfWork.SaveChanges(_user, eventStore,cancellationToken);
+
         // Возвращаем ИД нового пользователя и сообщение об успехе.
         return Result<CreatedUserResponse>.Success(
             new CreatedUserResponse(_user.Id), "Пользователь успешно зарегистрирован!");

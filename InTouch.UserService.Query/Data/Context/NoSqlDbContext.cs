@@ -34,9 +34,9 @@ public sealed class NoSqlDbContext : ISynchronizedDb, IReadDbContext
 
     public NoSqlDbContext(IOptions<ConnectionString> options, ILogger<NoSqlDbContext> logger)
     {
-        ConnectionString = "mongodb://shop-mongo-server";
+        ConnectionString = "mongodb://192.168.1.116:27017";
 
-        var mongoClient = new MongoClient("mongodb://shop-mongo-server");
+        var mongoClient = new MongoClient("mongodb://192.168.1.116:27017");
         _database = mongoClient.GetDatabase(DatabaseName);
         _logger = logger;
         _mongoRetryPolicy = CreateRetryPolicy(logger);

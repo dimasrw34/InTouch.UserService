@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Globalization;
 using FluentValidation;
 using FluentValidation.Resources;
@@ -6,9 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using InTouch.Application;
 using InTouch.Infrastructure;
+using InTouch.Infrastructure.Data;
 using InTouch.UserService.Core;
 using InTouch.UserService.Extensions;
 using InTouch.UserService.Query;
+using MediatR;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -18,7 +22,6 @@ var configuration = builder.Configuration;
 builder.Services
     .AddEndpointsApiExplorer()
     .AddControllers();
-
 
 builder.Services.AddInfrastructure();
 builder.Services.AddCommandHandlers();

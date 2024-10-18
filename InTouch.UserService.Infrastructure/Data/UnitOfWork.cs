@@ -1,15 +1,50 @@
+using System.Data;
+using InTouch.Infrastructure.Data.Extensions;
+using MediatR;
+using Npgsql;
+
 using InTouch.UserService.Core;
 using InTouch.UserService.Domain;
-using MediatR;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace InTouch.Infrastructure.Data;
 
-//IEventStoreRepository eventStoreRepository
-public class UnitOfWork (IMediator mediator) : IUnitOfWork
+public class UnitOfWork(
+    IDbContext dbContext,
+    IUserWriteOnlyRepository<User, Guid> userWriteOnlyRepository,
+    IEventStoreRepository eventStoreRepository,
+    IMediator mediator) : IUnitOfWork<User,Guid>
 {
-    public async Task SaveChanges(BaseEntity entity, CancellationToken cancellationToken)
+    private NpgsqlTransactionAsync _transaction;
+    private NpgsqlConnectionAsync _connection;
+    private IUserWriteOnlyRepository<User, Guid> Users => userWriteOnlyRepository;
+
+    private IEventStoreRepository Events => eventStoreRepository;
+    public async Task SaveChanges(User user, EventStore eventStore ,CancellationToken cancellationToken)
     {
-        foreach (var @event in entity.DomainEvents)
+        using (_connection is null? _connection = dbContext.ConnectionAsync: _connection)
+        {
+            if (_connection.State == ConnectionState.Closed)
+                await _connection.OpenAsync();
+            using (_transaction is null?_transaction = await _connection.BeginTransactionAsync(): _transaction)
+            {
+                try
+                {
+                    await Users.AddAsync(user);
+                    await Events.StoreAsync(eventStore);
+                    await _transaction.CommitAsync();
+                }
+                catch (Exception e)
+                {
+                    await _transaction.RollbackAsync();
+                    Console.WriteLine(e);
+                    throw;
+                }
+            }
+
+            await _connection.CloseAsync();
+        }
+        foreach (var @event in user.DomainEvents)
         {
             await mediator.Publish(@event, cancellationToken);
         }
@@ -40,8 +75,7 @@ public class UnitOfWork (IMediator mediator) : IUnitOfWork
         // Dispose managed state (managed objects).
         if (disposing)
         {
-            //writeDbContext.Dispose();
-            //eventStoreRepository.Dispose();
+            dbContext.Dispose();
         }
 
         _disposed = true;

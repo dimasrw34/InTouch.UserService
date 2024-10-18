@@ -14,10 +14,9 @@ public class UserEventHandler (
 {
     public async Task Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
     {
-       /*
         var userQueryModel = mapper.Map<UserQueryModel>(notification);
         await synchronizedDb.UpsertAsync(userQueryModel, filter => filter.Id == userQueryModel.Id);
-        */
+        
         
         Console.WriteLine(notification.OccuredOn + " Save to MongoDB ID  " + notification.Id + "   " + notification.Email.ToString());
     }
