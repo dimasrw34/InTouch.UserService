@@ -3,7 +3,7 @@ using Npgsql;
 
 namespace InTouch.Infrastructure.Data;
 
-public class NpgsqlConnectionAsync(NpgsqlConnection connection) : IDbConnectionAsync
+public sealed class NpgsqlConnectionAsync(NpgsqlConnection connection) : IDbConnectionAsync
 {
     private readonly NpgsqlConnection _connection = connection;
 

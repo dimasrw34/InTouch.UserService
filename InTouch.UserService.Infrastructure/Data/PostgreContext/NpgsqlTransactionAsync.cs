@@ -3,7 +3,7 @@ using Npgsql;
 
 namespace InTouch.Infrastructure.Data;
 
-public class NpgsqlTransactionAsync (ValueTask<NpgsqlTransaction> transaction): IDbTransactionAsync 
+public sealed class NpgsqlTransactionAsync (ValueTask<NpgsqlTransaction> transaction): IDbTransactionAsync 
 {
     private readonly ValueTask<NpgsqlTransaction> _transaction = transaction;
     public void Dispose() => _transaction.Result.Dispose();

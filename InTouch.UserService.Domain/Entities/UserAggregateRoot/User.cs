@@ -2,7 +2,7 @@ using InTouch.UserService.Core;
 
 namespace InTouch.UserService.Domain;
 
-public class User : BaseEntity, IAggregateRoot
+public sealed class User : BaseEntity, IAggregateRoot
 {
     private bool _isDeleted;
 
