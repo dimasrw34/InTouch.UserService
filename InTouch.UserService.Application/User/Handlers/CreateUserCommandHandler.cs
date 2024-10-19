@@ -13,11 +13,14 @@ namespace InTouch.Application;
 
 public class CreateUserCommandHandler(
     IValidator<CreateUserCommand> validator,
-    UnitOfWork unitOfWork,
-    IDbContext dbContext
+    IDbContext dbContext,
+    IUserWriteOnlyRepository<User,Guid> userWriteOnlyRepository,
+    IEventStoreRepository eventStoreRepository
     ) : IRequestHandler<CreateUserCommand, Result<CreatedUserResponse>>
 {
-    
+    private readonly IDbContext _context = dbContext;
+    private readonly IUserWriteOnlyRepository<User, Guid> _userWriteOnlyRepository = userWriteOnlyRepository;
+   
     public async Task<Result<CreatedUserResponse>> Handle(
         CreateUserCommand request,
         CancellationToken cancellationToken)
@@ -52,9 +55,12 @@ public class CreateUserCommandHandler(
            _user.Id,
            "CreateUserEntity",
            _user.ToJson());
-
+       
         // Сохранение изменений в БД и срабатывание событий.
-              await unitOfWork.SaveChanges(_user, eventStore,cancellationToken);
+       
+       await userWriteOnlyRepository.AddAsync(_user);
+       await eventStoreRepository.StoreAsync(eventStore);
+       await dbContext.Commit();
 
         // Возвращаем ИД нового пользователя и сообщение об успехе.
         return Result<CreatedUserResponse>.Success(

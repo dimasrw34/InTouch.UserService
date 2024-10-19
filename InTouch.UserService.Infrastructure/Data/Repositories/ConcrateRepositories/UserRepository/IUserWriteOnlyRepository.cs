@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+
 using InTouch.UserService.Core;
 using InTouch.UserService.Domain;
 

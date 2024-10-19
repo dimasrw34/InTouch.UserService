@@ -1,8 +1,9 @@
+using System.Threading.Tasks;
 using InTouch.UserService.Core;
 
 namespace InTouch.Infrastructure.Data;
 
-public class EventRepository(IDbContext context) 
+public class UserEventRepository(IDbContext context) 
     : BaseWriteOnlyRepository(context),
         IEventStoreRepository
 {
