@@ -57,10 +57,19 @@ public class CreateUserCommandHandler(
            _user.ToJson());
        
         // Сохранение изменений в БД и срабатывание событий.
+        try
+        {
+            await userWriteOnlyRepository.AddAsync(_user);
+            await eventStoreRepository.StoreAsync(eventStore);
+            await dbContext.Commit();
+        }
+        catch (Exception e)
+        {
+            await dbContext.Rollback();
+            return Result<CreatedUserResponse>.Error("Ошибка в сохранении данных на сервер!!!");
+            throw;
+        }
        
-       await userWriteOnlyRepository.AddAsync(_user);
-       await eventStoreRepository.StoreAsync(eventStore);
-       await dbContext.Commit();
 
         // Возвращаем ИД нового пользователя и сообщение об успехе.
         return Result<CreatedUserResponse>.Success(

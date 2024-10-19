@@ -51,11 +51,11 @@ public class DbContext : IDbContext, IDisposable
         }
     }
 
-    public void Rollback()
+    public async Task Rollback()
     {
         try
         {
-            UnitOfWork.Rollback();
+            await UnitOfWork.Rollback();
             State = IDbContextState.RolledBack;
         }
         finally

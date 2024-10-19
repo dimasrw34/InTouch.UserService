@@ -7,6 +7,6 @@ public interface IUnitOfWork
     IUnitOfWorkState Sate { get; }
     IDbTransaction Transaction { get; }
     Task Commit();
-    void Rollback();
+    Task Rollback();
 }
 

@@ -11,5 +11,5 @@ public interface IDbContext
     
     IUnitOfWork UnitOfWork { get; }
     Task Commit();
-    void Rollback();
+    Task Rollback();
 }

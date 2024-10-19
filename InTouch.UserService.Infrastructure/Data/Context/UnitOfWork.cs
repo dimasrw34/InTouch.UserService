@@ -18,7 +18,6 @@ public class UnitOfWork(IDbTransaction transaction) : IUnitOfWork
                 Transaction.Commit();
             });
             Sate = IUnitOfWorkState.Committed;
-            return;
         }
         catch (Exception e)
         {
@@ -27,9 +26,13 @@ public class UnitOfWork(IDbTransaction transaction) : IUnitOfWork
         }
     }
 
-    public void Rollback()
+    public async Task Rollback()
     {
-        Transaction.Rollback();
+        await Task.Run(() =>
+            {
+                Transaction.Rollback();
+            }
+        );
         Sate = IUnitOfWorkState.RolledBack;
     }
 }
