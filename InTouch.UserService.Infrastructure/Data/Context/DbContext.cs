@@ -19,7 +19,7 @@ public class DbContext : IDbContext, IDisposable
     public IDbContextState State { get; private set; } = IDbContextState.Closed;
 
     public IDbConnection Connection =>
-        _connection ?? (_connection = OpenConnection());
+        _connection ??= OpenConnection();
 
     private IDbConnection OpenConnection()
     {
@@ -28,21 +28,21 @@ public class DbContext : IDbContext, IDisposable
     }
 
     public IDbTransaction Transaction =>
-        _transaction ?? (_transaction = Connection.BeginTransaction());
+        _transaction ??= Connection.BeginTransaction();
 
     public IUnitOfWork UnitOfWork =>
-        _unitOfWork ?? (_unitOfWork = new UnitOfWork(Transaction));
+        _unitOfWork ??= new UnitOfWork(Transaction);
     
-    public async Task Commit()
+    public async Task CommitAsync()
     {
         try
         {
-            await UnitOfWork.Commit();
+            await UnitOfWork.CommitAsync();
             State = IDbContextState.Committed;
         }
         catch
         {
-            Rollback();
+            await RollbackAsync();
             throw;
         }
         finally
@@ -51,11 +51,11 @@ public class DbContext : IDbContext, IDisposable
         }
     }
 
-    public async Task Rollback()
+    public async Task RollbackAsync()
     {
         try
         {
-            await UnitOfWork.Rollback();
+            await UnitOfWork.RollbackAsync();
             State = IDbContextState.RolledBack;
         }
         finally
@@ -65,9 +65,9 @@ public class DbContext : IDbContext, IDisposable
     }
 
 
-    public void Dispose()
+    public async void Dispose()
     {
-        Commit();
+       //await CommitAsync();
     }
     
     private void Reset()

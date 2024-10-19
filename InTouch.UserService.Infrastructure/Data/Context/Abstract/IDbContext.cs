@@ -10,6 +10,6 @@ public interface IDbContext
     IDbTransaction Transaction { get; }
     
     IUnitOfWork UnitOfWork { get; }
-    Task Commit();
-    Task Rollback();
+    Task CommitAsync();
+    Task RollbackAsync();
 }

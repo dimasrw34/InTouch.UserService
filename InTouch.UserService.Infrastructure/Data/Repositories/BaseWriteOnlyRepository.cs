@@ -5,18 +5,15 @@ using Dapper;
 
 namespace InTouch.Infrastructure.Data;
 
-public abstract class BaseWriteOnlyRepository(IDbContext context) 
+public abstract class BaseWriteOnlyRepository( IDbConnection connection) 
 {
-    private readonly IDbConnection _connection = context.Connection;
-    private readonly IDbTransaction _transaction = context.Transaction;
-    
-    public async Task ExecuteAsync(string sql, object param)
-        => await  _connection.QueryAsync(sql, param, _transaction);
+    public async Task ExecuteAsync(string sql, IDbTransaction transaction, object param = null)
+        => await  connection.QueryAsync(sql, param,transaction);
     
 
     public async Task<IEnumerable<T>> QueryAsync<T>(string sql, object? param = null) =>
-        await _connection.QueryAsync<T>(sql, param);
+        await connection.QueryAsync<T>(sql, param);
         
-    public async Task<T> QuerySingleAsync<T>(string sql,  object? param = null) =>
-        await _connection.QueryFirstOrDefaultAsync<T>(sql, param, _transaction);
+    public async Task<T> QuerySingleAsync<T>(string sql, IDbTransaction transaction, object? param = null) =>
+        await connection.QueryFirstOrDefaultAsync<T>(sql, param,transaction);
 }

@@ -15,7 +15,8 @@ public class CreateUserCommandHandler(
     IValidator<CreateUserCommand> validator,
     IDbContext dbContext,
     IUserWriteOnlyRepository<User,Guid> userWriteOnlyRepository,
-    IEventStoreRepository eventStoreRepository
+    IEventStoreRepository eventStoreRepository,
+     IMediator mediator
     ) : IRequestHandler<CreateUserCommand, Result<CreatedUserResponse>>
 {
     private readonly IDbContext _context = dbContext;
@@ -37,11 +38,11 @@ public class CreateUserCommandHandler(
         var email = Email.Create(request.Email).Value;
         
         // Проверяем, что пользователь с такой почтой создан. 
-        /*if (await repository.ExistsByEmailAsync(email))
+        if (await userWriteOnlyRepository.ExistByEmailAsync(email))
         {
-            return Result<CreatedUserResponse>.Error("Указанный адрес электронной почты уже существует.");
-        }*/
-        
+            return Result<CreatedUserResponse>.Error("Пользователь с данной электронной почтой уже существует.");
+        }
+
         // Создание экземпляра сущности пользователя.
         // При создании экземпляра будет создано событие «UsrCreatedEvente».
         var _user = UserFactory.Create(
@@ -61,16 +62,15 @@ public class CreateUserCommandHandler(
         {
             await userWriteOnlyRepository.AddAsync(_user);
             await eventStoreRepository.StoreAsync(eventStore);
-            await dbContext.Commit();
+            await dbContext.CommitAsync();
         }
         catch (Exception e)
         {
-            await dbContext.Rollback();
+            await dbContext.RollbackAsync();
             return Result<CreatedUserResponse>.Error("Ошибка в сохранении данных на сервер!!!");
-            throw;
         }
-       
 
+        //await mediator.Publish(eventStore, cancellationToken);
         // Возвращаем ИД нового пользователя и сообщение об успехе.
         return Result<CreatedUserResponse>.Success(
             new CreatedUserResponse(_user.Id), "Пользователь успешно зарегистрирован!");

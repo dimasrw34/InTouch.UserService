@@ -6,7 +6,7 @@ public interface IUnitOfWork
 {
     IUnitOfWorkState Sate { get; }
     IDbTransaction Transaction { get; }
-    Task Commit();
-    Task Rollback();
+    Task CommitAsync();
+    Task RollbackAsync();
 }
 

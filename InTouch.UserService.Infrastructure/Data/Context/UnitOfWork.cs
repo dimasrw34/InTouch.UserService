@@ -9,7 +9,7 @@ public class UnitOfWork(IDbTransaction transaction) : IUnitOfWork
     public IUnitOfWorkState Sate { get; private set; } = IUnitOfWorkState.Open;
     public IDbTransaction Transaction { get; private set; } = transaction;
 
-    public async Task Commit()
+    public async Task CommitAsync()
     {
         try
         {
@@ -26,7 +26,7 @@ public class UnitOfWork(IDbTransaction transaction) : IUnitOfWork
         }
     }
 
-    public async Task Rollback()
+    public async Task RollbackAsync()
     {
         await Task.Run(() =>
             {
