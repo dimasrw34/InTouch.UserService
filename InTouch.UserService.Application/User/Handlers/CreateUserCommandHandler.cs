@@ -70,6 +70,10 @@ public class CreateUserCommandHandler(
             return Result<CreatedUserResponse>.Error("Ошибка в сохранении данных на сервер!!!");
         }
 
+        foreach (var @event in _user.DomainEvents)
+        {
+            await mediator.Publish(@event, cancellationToken);
+        }
         //await mediator.Publish(eventStore, cancellationToken);
         // Возвращаем ИД нового пользователя и сообщение об успехе.
         return Result<CreatedUserResponse>.Success(

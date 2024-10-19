@@ -16,7 +16,8 @@ public static class ConfigureService
             .AddTransient<IDbConnectionFactory> (options =>
             {
                 var builder = new NpgsqlConnectionStringBuilder(
-                    "Host=192.168.1.116;Database=postgres;Username=root;Password=example;Persist Security Info=True;Application Name=userservice;Enlist=true");
+                                                "Host=192.168.1.116;Database=postgres;Username=root;Password=example;" + 
+                                                "Persist Security Info=True;Application Name=userservice;Enlist=true");
                 return new DbConnectionFactory(() =>
                 {
                     var conn = new NpgsqlConnection(builder.ConnectionString);
