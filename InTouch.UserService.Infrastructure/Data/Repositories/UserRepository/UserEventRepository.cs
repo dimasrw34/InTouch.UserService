@@ -4,7 +4,7 @@ using InTouch.UserService.Core;
 
 namespace InTouch.Infrastructure.Data;
 
-public class UserEventRepository(IDbContext context) 
+public sealed class UserEventRepository(IDbContext context) 
     : BaseWriteOnlyRepository(context.Connection),
         IEventStoreRepository
 {

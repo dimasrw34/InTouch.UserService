@@ -1,22 +1,20 @@
 using Ardalis.Result;
 using Ardalis.Result.FluentValidation;
 using FluentValidation;
-using InTouch.Infrastructure.Data;
-using InTouch.UserService.Core;
 using MediatR;
 
 using InTouch.UserService.Domain;
-
-
+using InTouch.Infrastructure.Data;
+using InTouch.UserService.Core;
 
 namespace InTouch.Application;
 
-public class CreateUserCommandHandler(
+public sealed class CreateUserCommandHandler(
     IValidator<CreateUserCommand> validator,
     IDbContext dbContext,
     IUserWriteOnlyRepository<User,Guid> userWriteOnlyRepository,
     IEventStoreRepository eventStoreRepository,
-     IMediator mediator
+    IMediator mediator
     ) : IRequestHandler<CreateUserCommand, Result<CreatedUserResponse>>
 {
     private readonly IDbContext _context = dbContext;
@@ -70,11 +68,12 @@ public class CreateUserCommandHandler(
             return Result<CreatedUserResponse>.Error("Ошибка в сохранении данных на сервер!!!");
         }
 
+        //срабатыаем MediatR.INotify
         foreach (var @event in _user.DomainEvents)
         {
             await mediator.Publish(@event, cancellationToken);
         }
-        //await mediator.Publish(eventStore, cancellationToken);
+        
         // Возвращаем ИД нового пользователя и сообщение об успехе.
         return Result<CreatedUserResponse>.Success(
             new CreatedUserResponse(_user.Id), "Пользователь успешно зарегистрирован!");

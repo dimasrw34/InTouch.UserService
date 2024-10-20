@@ -3,7 +3,7 @@ using System.Data;
 
 namespace InTouch.Infrastructure.Data;
 
-public class DbConnectionFactory(Func<IDbConnection> connectionFactory) : IDbConnectionFactory
+public sealed class DbConnectionFactory(Func<IDbConnection> connectionFactory) : IDbConnectionFactory
 {
     private readonly Func<IDbConnection> _connectionFactoryFunc = 
         connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory));

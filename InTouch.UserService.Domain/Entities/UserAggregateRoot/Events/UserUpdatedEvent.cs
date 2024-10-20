@@ -1,9 +1,10 @@
 namespace InTouch.UserService.Domain;
 
-public class UserUpdatedEvent (
+public sealed class UserUpdatedEvent (
     Guid id,
     string email,
     string password,
     string name,
     string surname,
-    string phone): UserBaseEvent (id, email,password, name, surname, phone);
+    string phone)
+    : UserBaseEvent (id, email,password, name, surname, phone);

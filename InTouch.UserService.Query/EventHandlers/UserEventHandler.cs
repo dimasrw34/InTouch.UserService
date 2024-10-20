@@ -10,15 +10,20 @@ public class UserEventHandler (
     ISynchronizedDb synchronizedDb,
     ILogger<UserEventHandler> logger,
     IMapper mapper):
-    INotificationHandler<UserCreatedEvent>
+    INotificationHandler<UserCreatedEvent>,
+    INotificationHandler<UserUpdatedEvent>
 {
     public async Task Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
     {
         var userQueryModel = mapper.Map<UserQueryModel>(notification);
         await synchronizedDb.UpsertAsync(userQueryModel, filter => filter.Id == userQueryModel.Id);
-        
-        
-        Console.WriteLine(notification.OccuredOn + " Save to MongoDB ID  " + notification.Id + "   " + notification.Email.ToString());
+    }
+
+    public async Task Handle(UserUpdatedEvent notification, CancellationToken cancellationToken)
+    {
+        Console.WriteLine("Медиатор сработал");
+        var userQueryModel = mapper.Map<UserQueryModel>(notification);
+        await synchronizedDb.UpsertAsync(userQueryModel, filter => filter.Id == userQueryModel.Id);
     }
     
     private void LogEvent<TEvent>(TEvent @event) where TEvent : UserBaseEvent =>

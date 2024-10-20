@@ -1,6 +1,6 @@
 namespace InTouch.UserService.Domain;
 
-public class UserDeletedEvent (
+public sealed class UserDeletedEvent (
     Guid id,
     string email,
     string password,

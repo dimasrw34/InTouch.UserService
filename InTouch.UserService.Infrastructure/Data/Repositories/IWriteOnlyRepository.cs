@@ -14,8 +14,11 @@ public interface IWriteOnlyRepository<TEntity, in TKey>
     where TKey : IEquatable<TKey>
 {
     Task<Guid> AddAsync(TEntity entity);
+    
+    Task UpdateAsync(TEntity entity);
+
+    Task<TEntity> GetByIdAsync(TKey id);
     /*
-    Task<Guid> UpdateAsync(TEntity entity);
     Task<Guid> DeleteSoftAsync(TEntity entity);
     Task<Guid> DeleteAsync(TEntity entity);
     */

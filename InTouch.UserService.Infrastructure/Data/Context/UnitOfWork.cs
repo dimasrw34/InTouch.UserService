@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace InTouch.Infrastructure.Data;
 
-public class UnitOfWork(IDbTransaction transaction) : IUnitOfWork
+public sealed class UnitOfWork(IDbTransaction transaction) : IUnitOfWork
 {
     public IUnitOfWorkState Sate { get; private set; } = IUnitOfWorkState.Open;
     public IDbTransaction Transaction { get; private set; } = transaction;

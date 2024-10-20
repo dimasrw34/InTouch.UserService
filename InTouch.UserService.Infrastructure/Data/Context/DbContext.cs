@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace InTouch.Infrastructure.Data;
 
-public class DbContext : IDbContext, IDisposable
+public sealed class DbContext : IDbContext, IDisposable
 {
     private readonly IDbConnectionFactory _connectionFactory;
     private IDbConnection _connection;

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace InTouch.Application;
 
-public class CreateUserCommand : IRequest<Result<CreatedUserResponse>>
+public sealed class CreateUserCommand : IRequest<Result<CreatedUserResponse>>
 {
     public string Email { get; set; }
     public string Password { get; set; }

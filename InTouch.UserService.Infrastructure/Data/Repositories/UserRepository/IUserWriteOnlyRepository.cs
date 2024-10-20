@@ -12,4 +12,5 @@ public interface IUserWriteOnlyRepository<TEntity, in TKey> :
     where TKey : IEquatable<TKey>
 {
     Task<bool> ExistByEmailAsync(Email email);
+    Task<bool> ExistByEmailAndIdAsync(Email email, Guid Id);
 }
