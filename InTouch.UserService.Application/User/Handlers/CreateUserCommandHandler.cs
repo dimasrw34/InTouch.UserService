@@ -65,7 +65,7 @@ public sealed class CreateUserCommandHandler(
         catch (Exception e)
         {
             await dbContext.RollbackAsync();
-            return Result<CreatedUserResponse>.Error("Ошибка в сохранении данных на сервер!!!");
+            return Result<CreatedUserResponse>.Error("Ошибка в сохранении данных на сервер!!! " + e.Message);
         }
 
         //срабатыаем MediatR.INotify
