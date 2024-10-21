@@ -17,8 +17,8 @@ public class UpdateUserCommandHandler(
     IMediator mediator)
     : IRequestHandler<UpdateUserCommand, Result>
 {
-private readonly IDbContext _context = dbContext;
-private readonly IUserWriteOnlyRepository<User, Guid> _repository = repository;
+    private readonly IDbContext _context = dbContext;
+    private readonly IUserWriteOnlyRepository<User, Guid> _repository = repository;
 
     public async Task<Result> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {

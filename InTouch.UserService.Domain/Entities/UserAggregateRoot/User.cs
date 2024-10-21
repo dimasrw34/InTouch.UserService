@@ -40,8 +40,8 @@ public sealed class User : BaseEntity, IAggregateRoot
     /// <param name="newEmail">Новый почтовый адрес</param>
     public void ChangeEmail(Email newEmail)
     {
-        /*if(Email.Equals(newEmail))
-            return;*/
+        if(Email.Equals(newEmail))
+            return;
         Email = newEmail;
         AddDomainEvent(new UserUpdatedEvent(Id, newEmail.Address, Password, Name, Surname, Phone));
     }

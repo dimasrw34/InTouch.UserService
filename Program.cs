@@ -23,6 +23,7 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddControllers();
 
+builder.Services.AddRegisterTypeHandler();
 builder.Services.AddInfrastructure();
 builder.Services.AddCommandHandlers();
 builder.Services.AddQueryHandlers();

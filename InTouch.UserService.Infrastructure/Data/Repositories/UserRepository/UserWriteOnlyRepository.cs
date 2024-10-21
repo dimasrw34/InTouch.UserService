@@ -42,7 +42,7 @@ public sealed class UserWriteOnlyRepository (IDbContext context) :
 
     public async Task<User> GetByIdAsync(Guid id) =>
         await QuerySingleAsync<User>(
-            @"SELECT id, email as Email_Address, password, name, surname, phone " +
+            @"SELECT id, email, password, name, surname, phone " +
             "FROM users WHERE id=@id;",
             _transaction,
             new {id = id});
@@ -60,4 +60,9 @@ public sealed class UserWriteOnlyRepository (IDbContext context) :
                 id = currentId,
                 email = email.Address
             });
+
+    public async Task DeleteAsync(Guid id) =>
+        await ExecuteAsync("BEGIN; DELETE FROM users WHERE id=@id",
+                            _transaction,
+                        new {id = id});
 }

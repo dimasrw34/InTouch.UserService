@@ -1,4 +1,5 @@
 using System;
+using Dapper;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 
@@ -10,6 +11,12 @@ namespace InTouch.Infrastructure;
 
 public static class ConfigureService
 {
+    public static IServiceCollection AddRegisterTypeHandler(this IServiceCollection services)
+    {
+        SqlMapper.AddTypeHandler(new EmailTypeHandler());
+        return services;
+    }
+
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         return services

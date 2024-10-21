@@ -12,6 +12,9 @@ public class EventToQueryModelProfile : Profile
         
         CreateMap<UserUpdatedEvent, UserQueryModel>(MemberList.Destination)
             .ConstructUsing(@event => CreateUserQueryModel(@event));
+        
+        CreateMap<UserDeletedEvent, UserQueryModel>(MemberList.Destination)
+            .ConstructUsing(@event => CreateUserQueryModel(@event));
     }
 
     public override string ProfileName => nameof(EventToQueryModelProfile);

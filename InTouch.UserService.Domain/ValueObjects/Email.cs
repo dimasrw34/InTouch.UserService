@@ -14,13 +14,14 @@ public sealed record Email
     /// <summary>
     /// Конструктор по умолчанию для ORM
     /// </summary>
+    /// <param name="s"></param>
     public Email(){ }
 
     /// <summary>
     /// Создание нового инстанса <see cref="Email"/> класса.
     /// </summary>
     /// <param name="address">Адрес почты</param>
-    private Email(string address) =>
+    public Email(string address) =>
         Address = address;
 
     /// <summary>

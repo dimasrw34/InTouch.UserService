@@ -18,8 +18,6 @@ public interface IWriteOnlyRepository<TEntity, in TKey>
     Task UpdateAsync(TEntity entity);
 
     Task<TEntity> GetByIdAsync(TKey id);
-    /*
-    Task<Guid> DeleteSoftAsync(TEntity entity);
-    Task<Guid> DeleteAsync(TEntity entity);
-    */
+    Task DeleteAsync(TKey id);
+    
 }
