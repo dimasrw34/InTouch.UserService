@@ -10,10 +10,9 @@ public sealed class UserEventRepository(IDbContext context)
 {
     private readonly IDbConnection _connection = context.Connection;
     private readonly IDbTransaction _transaction = context.Transaction;
-  public async Task StoreAsync(EventStore? eventStore)
-    {
+    public async Task StoreAsync(EventStore? eventStore) =>
         await ExecuteAsync
-            (@"BEGIN; INSERT INTO public.eventstores (id, datastamp, messagetype, aggregateid, createdat) 
+            (@"INSERT INTO public.eventstores (id, datastamp, messagetype, aggregateid, createdat) 
                             VALUES (@eventdid_, @datastamp_, @messagetype_, @aggregateid_, @createdat_);",
                         _transaction,
             new { eventdid_= eventStore.Id,
@@ -23,5 +22,4 @@ public sealed class UserEventRepository(IDbContext context)
                         createdat_ = eventStore.OccuredOn
                         }
             );
-    }
 }

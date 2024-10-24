@@ -1,10 +1,8 @@
 using System;
 using System.Data;
 using System.Threading.Tasks;
-using Dapper;
 
 using InTouch.UserService.Domain;
-
 
 namespace InTouch.Infrastructure.Data;
 

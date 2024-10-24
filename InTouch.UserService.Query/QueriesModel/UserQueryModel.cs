@@ -1,3 +1,5 @@
+using System;
+
 namespace InTouch.UserService.Query;
 
 public class UserQueryModel : IQueryModel<Guid>

@@ -30,6 +30,7 @@ builder.Services.AddQueryHandlers();
 builder.Services.AddWriteOnlyRepositories();
 builder.Services.AddResponseMediatr();
 builder.Services.AddReadDbContext();
+builder.Services.AddReadOnlyRepositories();
 
 
 builder.Services.AddSwaggerGen();

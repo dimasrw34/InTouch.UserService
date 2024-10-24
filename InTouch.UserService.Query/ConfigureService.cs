@@ -1,6 +1,8 @@
 using System.Reflection;
 using AutoMapper;
 using InTouch.UserService.Query.Data;
+using InTouch.UserService.Query.Data.Repositories;
+using InTouch.UserService.Query.Data.Repositories.Abstractions;
 using MediatR.NotificationPublishers;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
@@ -12,6 +14,10 @@ namespace InTouch.UserService.Query;
 
 public static class ConfigureService
 {
+    /// <summary>
+    /// Adds query handlers to the service collection.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
     public static IServiceCollection AddQueryHandlers(this IServiceCollection services)
     {
         var assembly = Assembly.GetExecutingAssembly();
@@ -25,6 +31,11 @@ public static class ConfigureService
         
         
     }
+    
+    /// <summary>
+    /// Adds the read database context to the service collection.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
     public static IServiceCollection AddReadDbContext(this IServiceCollection services)
     {
         services
@@ -36,7 +47,19 @@ public static class ConfigureService
 
         return services;
     }
-   
+
+    /// <summary>
+    /// Adds read-only repositories to the service collection.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <returns></returns>
+    public static IServiceCollection AddReadOnlyRepositories(this IServiceCollection services) =>
+        services.AddScoped<IUserReadOnlyRepository, UserReadOnlyRepository>();
+    
+    
+    /// <summary>
+    /// Конфигурация MongoDB и mappnigs.
+    /// </summary>
     private static void ConfigureMongoDb()
     {
         try

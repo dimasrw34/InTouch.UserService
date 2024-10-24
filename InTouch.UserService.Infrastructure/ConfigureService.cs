@@ -11,12 +11,22 @@ namespace InTouch.Infrastructure;
 
 public static class ConfigureService
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
     public static IServiceCollection AddRegisterTypeHandler(this IServiceCollection services)
     {
         SqlMapper.AddTypeHandler(new EmailTypeHandler());
         return services;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         return services
@@ -34,10 +44,19 @@ public static class ConfigureService
             })
             .AddScoped<IDbContext, DbContext>();
     }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
     public static IServiceCollection AddWriteOnlyRepositories(this IServiceCollection services)
     {
         return services
             .AddScoped<IUserWriteOnlyRepository<User, Guid>, UserWriteOnlyRepository>()
             .AddScoped<IEventStoreRepository,UserEventRepository>();
     }
+
+    public static void AddDistributedCacheServic(this IServiceCollection services) =>
+        services.AddScoped<ICacheService, DistributedCashService>();
 }

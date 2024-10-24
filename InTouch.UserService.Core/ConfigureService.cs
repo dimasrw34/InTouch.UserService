@@ -16,4 +16,23 @@ public static class ConfigureService
             cfg.NotificationPublisher = new TaskWhenAllPublisher();
         });
     }
+    
+    public static IServiceCollection ConfigureAppSettings(this IServiceCollection services) =>
+        services.AddOptionsWithValidation<CacheOptions>();
+            //.AddOptionsWithValidation<ConnectionOptions>()
+            /// <summary>
+            /// Добавляет опции с проверкой в коллекцию услуг.
+            /// </summary>
+            /// <typeparam name="TOptions">The type of options to add.</typeparam>
+            /// <param name="services">The service collection.</param>
+            private static IServiceCollection AddOptionsWithValidation<TOptions>(this IServiceCollection services)
+                where TOptions : class, IAppOptions
+            {
+                return services
+                    .AddOptions<TOptions>()
+                    .BindConfiguration(TOptions.ConfigSectionPath, binderOptions => binderOptions.BindNonPublicProperties = true)
+                    .ValidateDataAnnotations()
+                    .ValidateOnStart()
+                    .Services;
+            }
 }

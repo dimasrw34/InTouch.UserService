@@ -1,4 +1,6 @@
+using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace InTouch.UserService.Query;
 

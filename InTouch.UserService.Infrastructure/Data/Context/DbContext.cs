@@ -4,18 +4,12 @@ using System.Threading.Tasks;
 
 namespace InTouch.Infrastructure.Data;
 
-public sealed class DbContext : IDbContext, IDisposable
+public sealed class DbContext(IDbConnectionFactory connectionFactory) : IDbContext, IDisposable
 {
-    private readonly IDbConnectionFactory _connectionFactory;
+    private readonly IDbConnectionFactory _connectionFactory= connectionFactory;
     private IDbConnection _connection;
-    private IDbTransaction _transaction;
+    private IDbTransaction _transaction; 
     private IUnitOfWork _unitOfWork;
-
-    public DbContext(IDbConnectionFactory connectionFactory)
-    {
-        _connectionFactory = connectionFactory;
-    }
-
     public IDbContextState State { get; private set; } = IDbContextState.Closed;
 
     public IDbConnection Connection =>
@@ -64,10 +58,10 @@ public sealed class DbContext : IDbContext, IDisposable
         }
     }
 
-
-    public async void Dispose()
+    public void Dispose()
     {
        //await CommitAsync();
+       Reset();
     }
     
     private void Reset()

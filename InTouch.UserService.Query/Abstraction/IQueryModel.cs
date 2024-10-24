@@ -1,7 +1,9 @@
+using System;
+
 namespace InTouch.UserService.Query;
 
 /// <summary>
-///  Инетерфейс query model
+///  Интерфейс query model
 /// </summary>
 public interface IQueryModel;
 

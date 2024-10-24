@@ -58,9 +58,9 @@ public sealed class CreateUserCommandHandler(
         // Сохранение изменений в БД и срабатывание событий.
         try
         {
-            await userWriteOnlyRepository.AddAsync(_user);
-            await eventStoreRepository.StoreAsync(eventStore);
-            await dbContext.CommitAsync();
+            userWriteOnlyRepository.AddAsync(_user);
+            eventStoreRepository.StoreAsync(eventStore);
+            dbContext.CommitAsync();
         }
         catch (Exception e)
         {
