@@ -57,6 +57,6 @@ public static class ConfigureService
             .AddScoped<IEventStoreRepository,UserEventRepository>();
     }
 
-    public static void AddDistributedCacheServic(this IServiceCollection services) =>
+    public static void AddDistributedCacheService(this IServiceCollection services) =>
         services.AddScoped<ICacheService, DistributedCashService>();
 }

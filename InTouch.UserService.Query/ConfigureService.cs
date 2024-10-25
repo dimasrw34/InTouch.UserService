@@ -9,6 +9,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.Serializers;
+using FluentValidation;
 
 namespace InTouch.UserService.Query;
 
@@ -22,12 +23,9 @@ public static class ConfigureService
     {
         var assembly = Assembly.GetExecutingAssembly();
         return services
-            .AddMediatR(cfg => { 
-                cfg.RegisterServicesFromAssembly(assembly);
-                cfg.NotificationPublisher = new TaskWhenAllPublisher();
-            })
-            .AddSingleton<IMapper>(new Mapper(new MapperConfiguration(cfg => cfg.AddMaps(assembly))));
-        //.AddValidatorsFromAssembly(assembly);
+             .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly))
+            .AddSingleton<IMapper>(new Mapper(new MapperConfiguration(cfg => cfg.AddMaps(assembly))))
+            .AddValidatorsFromAssembly(assembly);
         
         
     }

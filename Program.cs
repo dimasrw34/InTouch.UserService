@@ -1,28 +1,31 @@
-using System.Configuration;
 using System.Globalization;
 using FluentValidation;
 using FluentValidation.Resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+
 using Microsoft.Extensions.Hosting;
 using InTouch.Application;
 using InTouch.Infrastructure;
-using InTouch.Infrastructure.Data;
+using InTouch.UserService;
 using InTouch.UserService.Core;
 using InTouch.UserService.Extensions;
 using InTouch.UserService.Query;
-using MediatR;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc;
+
 
 var builder = WebApplication.CreateBuilder(args);
-var configuration = builder.Configuration;
+//var configuration = builder.Configuration;
 
 
+builder.Services.Configure<JsonOptions>(jsonOptions => jsonOptions.JsonSerializerOptions.Configure());
 // Add services to the container.
 builder.Services
     .AddEndpointsApiExplorer()
-    .AddControllers();
+    .AddControllers()
+    .AddJsonOptions(_ => { });
 
+builder.Services.ConfigureAppSettings();
 builder.Services.AddRegisterTypeHandler();
 builder.Services.AddInfrastructure();
 builder.Services.AddCommandHandlers();
@@ -31,6 +34,7 @@ builder.Services.AddWriteOnlyRepositories();
 builder.Services.AddResponseMediatr();
 builder.Services.AddReadDbContext();
 builder.Services.AddReadOnlyRepositories();
+builder.Services.AddCacheService(builder.Configuration);
 
 
 builder.Services.AddSwaggerGen();
